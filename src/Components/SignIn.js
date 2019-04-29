@@ -85,6 +85,7 @@ class SignIn extends Component {
         this.state.userData.map((ele, ind) => {
             if (ele.email == this.state.login_email) {
                 if (ele.user_id == this.state.login_password) {
+                    localStorage.setItem("currentUser",JSON.stringify(ele))
                     return this.props.history.push('/')
                 } else {
 
