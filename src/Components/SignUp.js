@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Input from './Input';
 import './style.css';
+import axios from 'axios'
 import Button from './Button';
 import AppHeader from './appheader'
 import ErrorHandler from './errorHandler';
+import Axios from 'axios';
 class Signup extends Component {
   constructor(props) {
     super(props)
@@ -80,7 +82,7 @@ class Signup extends Component {
       isPasswordValid: isPasswordValid,
       isNameValid: isNameValid,
       isPhoneValid: isPhoneValid
-    }, this.validation);
+    }, this.validation());
   }
   validation=() =>{
     this.setState({
@@ -89,6 +91,14 @@ class Signup extends Component {
         this.state.isNameValid &&
         this.state.isPhoneValid
     });
+  }
+  onClickSignUp(){
+    axios.post('http://localhost:5001/users',{
+      name: this.state.name,
+      user_id: this.state.password,
+      email: this.state.email
+
+    })
   }
   render() {
     return (
@@ -103,14 +113,14 @@ class Signup extends Component {
                 <ErrorHandler className='err' errorList={this.state.formErrors} />
               </div>
               <label>Name</label>
-              <Input input_type={'text'} inputName={'name'} inputPlaceholder={'Name'} input_value={this.state.name} inputChange={this.onChange}></Input>
+              <Input inputType={'text'} inputName={'name'} inputPlaceholder={'Name'} inputValue={this.state.name} inputChange={this.onChange}></Input>
               <label>Email</label>
-              <Input input_type={'email'} inputName={'email'} inputPlaceholder={'Email'} input_value={this.state.email} inputChange={this.onChange}></Input>
+              <Input inputType={'email'} inputName={'email'} inputPlaceholder={'Email'} inputValue={this.state.email} inputChange={this.onChange}></Input>
               <label>Mobile</label>
-              <Input input_type={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} input_value={this.state.mobile} inputChange={this.onChange}></Input>
+              <Input inputType={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} input_vinputValuealue={this.state.mobile} inputChange={this.onChange}></Input>
               <label>Password</label>
-              <Input input_type={'password'} inputName={'password'} inputPlaceholder={'Password'} input_value={this.state.password} inputChange={this.onChange}></Input><br></br>
-              <Button buttonType={'submit'} buttonName={'Submit'}></Button>
+              <Input inputType={'password'} inputName={'password'} inputPlaceholder={'Password'} inputValue={this.state.password} inputChange={this.onChange}></Input><br></br>
+              <Button buttonType={'submit'} buttonClick={this.onClickSignUp} buttonName={'Submit'}></Button>
             </form>
             </div>
 
@@ -124,26 +134,7 @@ class Signup extends Component {
     )
   }
 
-  SignInMenu = () => {
-    this.setState({
-      SignIn: true,
-      login_email: '',
-      login_password: '',
-      formErrors: { login_email: '', login_password: '' },
-
-    });
-  }
-  SignUpMenu = () => {
-    this.setState({
-      SignIn: false,
-      name: '',
-      password: '',
-      email: '',
-      mobile: '',
-      formErrors: { name: '', email: '', password: '', mobile: '' }
-    })
-  }
-
+ 
 }
 
 export default Signup;

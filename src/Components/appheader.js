@@ -17,19 +17,19 @@ class appHeader extends Component {
                         <a className="navbar-brand" href="#">NaukriPao</a>
                     </div>
                     <ul className="nav navbar-nav">
-                    <li> <Link to="/">Home</Link></li>
-                   
+                        <li> <Link to="/">Home</Link></li>
+
 
                     </ul>
-                    <ul className="nav navbar-nav" style={{float : "right"}}>
+                    <ul className="nav navbar-nav" style={{ float: "right" }}>
 
                         {/* <div><li><Button buttonType={'button'} buttonClick={this.SignInMenu} buttonName={'Login'}></Button></li></div>
                         <div><li><Button buttonType={'button'} buttonClick={this.SignUpMenu} buttonName={'Signup'}></Button></li></div> */}
                         <li>
-                        <Link to="/signin">Sign In</Link>
+                            <Link to="/signin">Sign In</Link>
                         </li>
                         <li>
-                        <Link to="/signup">Sign Up</Link>
+                            <Link to="/signup">Sign Up</Link>
                         </li>
                     </ul>
                 </div>

@@ -1,4 +1,4 @@
-import React , { Component } from 'react';
+import React, { Component } from 'react';
 import AppHeader from './appheader'
 import AppFooter from './appFooter'
 import JobFilter from './jobFilter'
@@ -8,24 +8,24 @@ import '../App.css'
 
 
 class Home extends Component {
-  
-constructor(){
+
+  constructor() {
     super();
-  this.state= {
-    company:'',
-    location:'',
-    designation:''   
-}
+    this.state = {
+      company: '',
+      location: '',
+      designation: ''
+    }
 
-}
+  }
 
- changeFilter(temp){
-  return this.setState(temp,()=>{
-   console.log(this.state)
-   })
+  changeFilter(temp) {
+    return this.setState(temp, () => {
+      console.log(this.state)
+    })
 
- }
-   
+  }
+
 
   render() {
     let temp = JobData;
@@ -33,19 +33,19 @@ constructor(){
     return (
 
       <div className="App">
-     
-      <AppHeader />
-      <JobFilter filter={this.state} onfilterchange={(temp)=>{this.changeFilter(temp)}}/>
-      
-      <JobListing filterList={this.state} jobs ={temp}/>
-      <AppFooter/>
-   
+
+        <AppHeader />
+        <JobFilter filter={this.state} onfilterchange={(temp) => { this.changeFilter(temp) }} />
+
+        <JobListing filterList={this.state} jobs={temp} />
+        <AppFooter />
+
 
       </div>
     )
   }
 
-   
+
 }
 
 

@@ -3,7 +3,9 @@ import Input from './Input';
 import './style.css';
 import Button from './Button';
 import AppHeader from './appheader'
+import { Redirect } from 'react-router-dom';
 import ErrorHandler from './errorHandler';
+import axios from 'axios'
 class SignIn extends Component {
     constructor(props) {
         super(props)
@@ -16,7 +18,7 @@ class SignIn extends Component {
             //isNameValid: false,
             isEmailValid: false,
             isPasswordValid: false,
-
+            userData: '',
             formValid: false,
             SignIn: true,
 
@@ -47,7 +49,8 @@ class SignIn extends Component {
                 errors.email = isEmailValid ? '' : 'invalid';
                 break;
             case 'login_password':
-                isPasswordValid = value.length >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+                // isPasswordValid = value.length >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+                isPasswordValid = true;
                 errors.password = isPasswordValid ? '' : 'is too weak';
                 break;
 
@@ -67,6 +70,30 @@ class SignIn extends Component {
                 this.state.isPasswordValid
         });
     }
+    componentDidMount() {
+        axios.get('http://localhost:5001/users')
+            .then((res) => {
+
+                this.setState({ userData: res.data }, () => {
+                    console.log(res.data)
+                });
+
+            })
+    }
+    onClickSignIn = (e) => {
+        e.preventDefault();
+        this.state.userData.map((ele, ind) => {
+            if (ele.email == this.state.login_email) {
+                if (ele.user_id == this.state.login_password) {
+                    return this.props.history.push('/')
+                } else {
+
+                    return console.log("incorrect password")
+                }
+
+            }
+        })
+    }
     render() {
         return (
             <div>
@@ -79,10 +106,10 @@ class SignIn extends Component {
                             <ErrorHandler className='err' errorList={this.state.formErrors} />
                         </div>
                         <label>Email</label>
-                        <Input input_type={'email'} inputName={'login_email'} inputPlaceholder={'Email'} input_value={this.state.login_email} inputChange={this.onChange}></Input>
+                        <Input inputType={'email'} inputName={'login_email'} inputPlaceholder={'Email'} inputValue={this.state.login_email} inputChange={this.onChange}></Input>
                         <label>Password</label>
-                        <Input input_type={'password'} inputName={'login_password'} inputPlaceholder={'Password'} inputValue={this.state.login_password} inputChange={this.onChange}></Input><br></br>
-                        <Button buttonType={'submit'} buttonName={'Submit'}></Button>
+                        <Input inputType={'password'} inputName={'login_password'} inputPlaceholder={'Password'} inputValue={this.state.login_password} inputChange={this.onChange}></Input><br></br>
+                        <Button buttonType={'submit'} buttonClick={this.onClickSignIn} buttonName={'Submit'}></Button>
                     </form>
                 </div>
             </div>
