@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Button from './Button'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Link } from 'react-router-dom';
+import Home from './home';
 class appHeader extends Component {
     SignInMenu() {
         this.nextPath('/signin')
@@ -8,9 +10,12 @@ class appHeader extends Component {
     SignUpMenu() {
         this.nextPath('/signup')
     }
+
     render() {
         var currentUser = JSON.parse(localStorage.getItem("currentUser"))
         console.log(currentUser);
+      
+        
 
         return (
 

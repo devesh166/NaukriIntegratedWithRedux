@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import "./style.css"
-
+var temp;
+var currentUser;
 class jobListing extends Component {
     constructor(props) {
         super(props);
@@ -20,12 +21,15 @@ class jobListing extends Component {
 
         }
     }
+    componentWillMount(){
+        currentUser=JSON.parse(localStorage.getItem('currentUser'));
+    }
 
     render() {
         // this.setState(()=>{
         //     this.state = this.props.filterList;
         // })
-        var temp;
+        
         if (this.state.company == '' && this.state.location == '' && this.state.designation == '') {
             temp = this.props.jobs;
 
@@ -51,9 +55,9 @@ class jobListing extends Component {
             })
         }
 
-
+        let count=0;
         return (
-
+        
 
             temp.map((item, ind) => {
                 return (
@@ -61,14 +65,16 @@ class jobListing extends Component {
 
 
                     <div className="card ">
-                        <div className="row" ><b>{this.props.jobs[ind].company}</b></div>
+                        <div className="row" ><b>{this.props.jobs[ind].name}</b></div>
                         <div className="row" >
                             <div className="col-sm-2" > <img src={require("./paris.jpg")} height="50pt" width="50pt" alt="paris.jpg"></img></div>
-                            < div className="col-sm-2 jobDetails" >{this.props.jobs[ind].id}</div>
-                            < div className="col-sm-2 jobDetails">{this.props.jobs[ind].designation}</div>
-                            < div className="col-sm-2 jobDetails" >{this.props.jobs[ind].location}</div>
+                            < div className="col-sm-2 jobDetails" >{count++}</div>
+                            < div className="col-sm-2 jobDetails">Gurgaon</div>
+                            {/* this.props.jobs[ind].position */}
+                            < div className="col-sm-2 jobDetails">{this.props.jobs[ind].position}</div>
                             < div className="col-sm-2 jobDetails" >{this.props.jobs[ind].salary}</div>
-                            <button className="w3-button w3-block w3-dark-grey">Apply</button>
+                            {currentUser.role<2?'' :<button className="w3-button w3-block w3-dark-grey">Apply</button>}
+                           
                         </div>
                     </div>
 

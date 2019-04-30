@@ -16,8 +16,6 @@ class Signup extends Component {
       password: '',
       email: '',
       mobile: '',
-      login_email: '',
-      login_password: '',
       formErrors: { name: '', email: '', password: '', mobile: '', login_email: '', login_password: '' },
       isNameValid: false,
       isEmailValid: false,
@@ -52,14 +50,7 @@ class Signup extends Component {
         isPhoneValid = value.length === 10 && value.match(/^[0-9]+$/);;
         errors.mobile = isPhoneValid ? '' : ' number is not valid.';
         break;
-      case 'login_email':
-        isEmailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-        errors.email = isEmailValid ? '' : 'invalid';
-        break;
-      case 'login_password':
-        isPasswordValid = value.length >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
-        errors.password = isPasswordValid ? '' : 'is too weak';
-        break;
+    
       case 'email':
         isEmailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
         errors.email = isEmailValid ? '' : 'invalid';
@@ -85,6 +76,11 @@ class Signup extends Component {
       isPhoneValid: isPhoneValid
     }, this.validation());
   }
+  componentWillMount(){
+    if(localStorage.getItem('currentUser')){
+        this.props.history.push('/');
+    }
+} 
   validation=() =>{
     this.setState({
       formValid: this.state.isEmailValid &&
@@ -104,6 +100,7 @@ class Signup extends Component {
     })
     .then((res)=>{
       console.log(res);
+      localStorage.setItem("currentUser",JSON.stringify(res.data))
       return this.props.history.push('/');
     }
 

@@ -26,6 +26,11 @@ class SignIn extends Component {
 
 
     }
+    componentWillMount(){
+        if(localStorage.getItem('currentUser')){
+            this.props.history.push('/');
+        }
+    }
 
     onChange = (event) => {
         let key = event.target.name;
@@ -70,7 +75,7 @@ class SignIn extends Component {
                 this.state.isPasswordValid
         });
     }
-    
+
     componentDidMount() {
         axios.get('http://localhost:5001/users')
             .then((res) => {
@@ -87,7 +92,12 @@ class SignIn extends Component {
             if (ele.email == this.state.login_email) {
                 if (ele.user_id == this.state.login_password) {
                     localStorage.setItem("currentUser",JSON.stringify(ele))
-                    return this.props.history.push('/')
+                    if(ele.role==1){
+                        return this.props.history.push('/company')
+                    }else{
+                        return this.props.history.push('/')
+                    }
+                    
                 } else {
 
                     return console.log("incorrect password")
