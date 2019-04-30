@@ -4,6 +4,7 @@ import './style.css';
 import axios from 'axios'
 import Button from './Button';
 import AppHeader from './appheader'
+import AppFooter from './appFooter'
 import ErrorHandler from './errorHandler';
 import Axios from 'axios';
 class Signup extends Component {
@@ -134,7 +135,7 @@ class Signup extends Component {
           
         </div>
 
-
+        <AppFooter></AppFooter>
       </div>
 
     )

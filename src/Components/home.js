@@ -17,33 +17,46 @@ class Home extends Component {
       company: '',
       location: '',
       designation: '',
-      jobList:[]
+      jobList: []
     }
 
   }
-  componentWillMount(){
-    currentUser=JSON.parse(localStorage.getItem('currentUser'));
-    if(currentUser.role<2){
-      axios.get('http://localhost:5001/jobs/'+currentUser.name)
-    //axios.get('http://localhost:5001/users')
-    .then((res) => {
-        console.log()
-        this.setState({ jobList: res.data }, () => {
-            console.log(res.data)
-        });
-
-    })
+  componentWillMount() {
+    if(localStorage.getItem('currentUser')){
+      currentUser=JSON.parse(localStorage.getItem('currentUser'));
+      if(currentUser.role<2){
+        axios.get('http://localhost:5001/jobs/'+currentUser.name)
+      //axios.get('http://localhost:5001/users')
+      .then((res) => {
+          console.log()
+          this.setState({ jobList: res.data }, () => {
+              console.log(res.data)
+          });
+  
+      })
+      }else{
+        axios.get('http://localhost:5001/jobs')
+      //axios.get('http://localhost:5001/users')
+      .then((res) => {
+  
+          this.setState({ jobList: res.data }, () => {
+              console.log(res.data)
+          });
+  
+      })
+      }
     }else{
       axios.get('http://localhost:5001/jobs')
-    //axios.get('http://localhost:5001/users')
-    .then((res) => {
-
-        this.setState({ jobList: res.data }, () => {
-            console.log(res.data)
-        });
-
-    })
+      //axios.get('http://localhost:5001/users')
+      .then((res) => {
+  
+          this.setState({ jobList: res.data }, () => {
+              console.log(res.data)
+          });
+  
+      })
     }
+ 
   }
 
   changeFilter(temp) {
@@ -53,17 +66,17 @@ class Home extends Component {
     })
 
   }
-  componentDidMount(){
-   
-    
+  componentDidMount() {
+
+
   }
 
 
   render() {
-   // let temp = JobData;
+    // let temp = JobData;
     console.log(this.state.jobList)
     return (
-      
+
       <div className="App">
 
         <AppHeader />

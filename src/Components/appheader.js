@@ -12,9 +12,11 @@ class appHeader extends Component {
     }
 
     render() {
+       if(localStorage.getItem("currentUser")){
         var currentUser = JSON.parse(localStorage.getItem("currentUser"))
         console.log(currentUser);
       
+       }
         
 
         return (
@@ -33,6 +35,10 @@ class appHeader extends Component {
 
                         <li>
                             <Link to="/signin"> hi {currentUser.name} </Link>
+                        </li>
+                        <li>
+                        {localStorage.getItem('currentUser')?( currentUser.role < 2 ?  <Link style={{backgroundColor:'#007b5e'}} to='/company'>Add Job</Link> :''):''}
+
                         </li>
                         <li>
                             <Link to="/" ><span onClick = {()=>{localStorage.removeItem('currentUser')}}>Logout</span></Link>

@@ -3,9 +3,11 @@ import Input from './Input';
 import './style.css';
 import Button from './Button';
 import AppHeader from './appheader'
+import AppFooter from './appFooter'
 import { Redirect } from 'react-router-dom';
 import ErrorHandler from './errorHandler';
 import axios from 'axios'
+import appFooter from './appFooter';
 class SignIn extends Component {
     constructor(props) {
         super(props)
@@ -124,6 +126,7 @@ class SignIn extends Component {
                         <Button buttonType={'submit'} buttonClick={this.onClickSignIn} buttonName={'Submit'}></Button>
                     </form>
                 </div>
+                <AppFooter></AppFooter>
             </div>
         )
 

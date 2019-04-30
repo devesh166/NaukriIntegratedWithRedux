@@ -21,15 +21,18 @@ class jobListing extends Component {
 
         }
     }
-    componentWillMount(){
-        currentUser=JSON.parse(localStorage.getItem('currentUser'));
+    componentWillMount() {
+        if(localStorage.getItem('currentUser')){
+            currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        }
+       
     }
 
     render() {
         // this.setState(()=>{
         //     this.state = this.props.filterList;
         // })
-        
+
         if (this.state.company == '' && this.state.location == '' && this.state.designation == '') {
             temp = this.props.jobs;
 
@@ -54,11 +57,11 @@ class jobListing extends Component {
                 }
             })
         }
-
-        let count=0;
+        console.log(temp);
+        let count = 0;
         return (
-        
 
+            
             temp.map((item, ind) => {
                 return (
                     //<div style={{backgroundColor : "#007b5e", }} >
@@ -73,8 +76,9 @@ class jobListing extends Component {
                             {/* this.props.jobs[ind].position */}
                             < div className="col-sm-2 jobDetails">{this.props.jobs[ind].position}</div>
                             < div className="col-sm-2 jobDetails" >{this.props.jobs[ind].salary}</div>
-                            {currentUser.role<2?'' :<button className="w3-button w3-block w3-dark-grey">Apply</button>}
-                           
+
+                            {localStorage.getItem('currentUser')?( currentUser.role < 2 ? '' : <button className="w3-button w3-block w3-dark-grey">Apply</button>):<button disabled='true' className="w3-button w3-block w3-dark-grey" onClick={()=>{this.props.history.push('/login')}}>Login to Apply</button>}
+
                         </div>
                     </div>
 
