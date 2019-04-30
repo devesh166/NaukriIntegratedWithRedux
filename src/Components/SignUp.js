@@ -65,8 +65,9 @@ class Signup extends Component {
         errors.email = isEmailValid ? '' : 'invalid';
         break;
       case 'password':
-        isPasswordValid = (value.length) >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
-        errors.password = isPasswordValid ? '' : 'is too Weak';
+       // isPasswordValid = (value.length) >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+       isPasswordValid =true;
+       errors.password = isPasswordValid ? '' : 'is too Weak';
         break;
       case 'name':
         isNameValid = value.match(/^[a-zA-Z]+$/);;
@@ -92,13 +93,21 @@ class Signup extends Component {
         this.state.isPhoneValid
     });
   }
-  onClickSignUp(){
+  onClickSignUp=(e)=>{
+    e.preventDefault();
     axios.post('http://localhost:5001/users',{
       name: this.state.name,
       user_id: this.state.password,
-      email: this.state.email
-
+      email: this.state.email,
+      mobile: this.state.mobile,
+      role: 'user'
     })
+    .then((res)=>{
+      console.log(res);
+      return this.props.history.push('/');
+    }
+
+    )
   }
   render() {
     return (

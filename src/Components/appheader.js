@@ -9,6 +9,9 @@ class appHeader extends Component {
         this.nextPath('/signup')
     }
     render() {
+        var currentUser = JSON.parse(localStorage.getItem("currentUser"))
+        console.log(currentUser);
+
         return (
 
             <nav className="navbar navbar-inverse">
@@ -21,17 +24,27 @@ class appHeader extends Component {
 
 
                     </ul>
-                    <ul className="nav navbar-nav" style={{ float: "right" }}>
+                    {currentUser ? <ul className="nav navbar-nav" style={{ float: "right" }}>
 
-                        {/* <div><li><Button buttonType={'button'} buttonClick={this.SignInMenu} buttonName={'Login'}></Button></li></div>
-                        <div><li><Button buttonType={'button'} buttonClick={this.SignUpMenu} buttonName={'Signup'}></Button></li></div> */}
                         <li>
-                            <Link to="/signin">Sign In</Link>
+                            <Link to="/signin"> hi {currentUser.name} </Link>
                         </li>
                         <li>
-                            <Link to="/signup">Sign Up</Link>
+                            <Link to="/" ><span onClick = {()=>{localStorage.removeItem('currentUser')}}>Logout</span></Link>
                         </li>
                     </ul>
+                        :
+                        <ul className="nav navbar-nav" style={{ float: "right" }}>
+
+                            <li>
+                                <Link to="/signin">Sign In</Link>
+                            </li>
+                            <li>
+                                <Link to="/signup">Sign Up</Link>
+                            </li>
+                        </ul>}
+
+
                 </div>
 
             </nav>
