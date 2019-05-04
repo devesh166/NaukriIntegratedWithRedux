@@ -6,7 +6,7 @@ class jobListing extends Component {
     constructor(props) {
         super(props);
         //console.log(props);
-        this.state = this.props.filterList;
+         this.state = props.filterList;
         // console.log(this.state)
     }
 
@@ -37,18 +37,19 @@ class jobListing extends Component {
             temp = this.props.jobs;
 
         } else {
-            temp = this.props.jobs.filter((element, ind) => {
-                if (this.state.location && element.location !== this.state.location) {
-                    console.log(element);
+           
+            temp =   this.props.jobs.filter((element, ind) => {
+                if (this.state.location && element.location != this.state.location) {
+                   // console.log(element);
                     return false;
 
                 }
-                if (this.state.designation && element.designation !== this.state.designation) {
-                    console.log(element)
+                if (this.state.designation && element.position != this.state.designation) {
+                   // console.log(element,)
                     return false;
                 }
-                if (this.state.company && element.company !== this.state.company) {
-                    console.log(element)
+                if (this.state.company && element.name != this.state.company) {
+                    console.log(element.name,this.state.company)
                     return false;
                 }
                 else {
@@ -57,8 +58,10 @@ class jobListing extends Component {
                 }
             })
         }
-        console.log(temp);
-        let count = 0;
+       // console.log(temp);
+        let count = 1;
+        //let temp2 = temp.reverse();
+       // console.log(temp2) 
         return (
 
             
@@ -67,17 +70,18 @@ class jobListing extends Component {
                     //<div style={{backgroundColor : "#007b5e", }} >
 
 
-                    <div className="card ">
+                    <div key={ind} className="card ">
                         <div className="row" ><b>{this.props.jobs[ind].name}</b></div>
                         <div className="row" >
+                        < div className="col-sm-2 jobDetails" >{count++}</div>
                             <div className="col-sm-2" > <img src={require("./paris.jpg")} height="50pt" width="50pt" alt="paris.jpg"></img></div>
-                            < div className="col-sm-2 jobDetails" >{count++}</div>
+                            
                             < div className="col-sm-2 jobDetails">Gurgaon</div>
                             {/* this.props.jobs[ind].position */}
                             < div className="col-sm-2 jobDetails">{this.props.jobs[ind].position}</div>
                             < div className="col-sm-2 jobDetails" >{this.props.jobs[ind].salary}</div>
 
-                            {localStorage.getItem('currentUser')?( currentUser.role < 2 ? '' : <button className="w3-button w3-block w3-dark-grey">Apply</button>):<button disabled='true' className="w3-button w3-block w3-dark-grey" onClick={()=>{this.props.history.push('/login')}}>Login to Apply</button>}
+                            {localStorage.getItem('currentUser')?( currentUser.role < 2 ? '' : <button className="w3-button w3-block w3-dark-grey">Apply</button>):<button disabled='true' className="w3-button w3-block w3-dark-grey" >Login to Apply</button>}
 
                         </div>
                     </div>

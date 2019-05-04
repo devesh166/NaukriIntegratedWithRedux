@@ -3,29 +3,36 @@ import './style.css';
 import Input from './Input';
 import ErrorHandler from './errorHandler';
 import Button from './Button';
-import axios from 'axios'
+import Appheader from './appheader'
+import Appfooter from './appFooter'
+
 var currentUser = {};
+var count =1245;
 class company extends Component {
-  render(){
-    return(
-      <div>Hii </div>
-    )
-  }
+  // render(){
+  //   return(
+  //     <div>Hii </div>
+  //   )
+  // }
     constructor() {
         super()
         this.state = {
+          designation:'',
+          salary:'',
+          location:'',
+
 
             name: '',
             password: '',
             email: '',
             mobile: '',
-            formErrors: { name: '', email: '', password: '', mobile: '', login_email: '', login_password: '' },
-            isNameValid: false,
-            isEmailValid: false,
-            isPasswordValid: false,
-            isPhoneValid: false,
-            formValid: false,
-            SignIn: true,
+            // formErrors: { name: '', email: '', password: '', mobile: '', login_email: '', login_password: '' },
+            // isNameValid: false,
+            // isEmailValid: false,
+            // isPasswordValid: false,
+            // isPhoneValid: false,
+            // formValid: false,
+            // SignIn: true,
       
           }
       
@@ -33,18 +40,18 @@ class company extends Component {
 
     componentWillMount() {
         currentUser = JSON.parse(localStorage.getItem('currentUser'))
-        // if(localStorage.getItem('currentUser')){
-        //     this.props.history.push('/');
-        // }
+        if(!localStorage.getItem('currentUser')){
+            this.props.history.push('/');
+        }
     }
-    // onChange = (event) => {
-    //     let key = event.target.name;
-    //     let value = event.target.value;
+    onChange = (event) => {
+        let key = event.target.name;
+        let value = event.target.value;
     
-    //     this.setState({
-    //       [key]: value
-    //     }, () => this.checkValidation(key, value));
-    //   }
+        this.setState({
+          [key]: value
+        });
+      }
     //   checkValidation=(fieldName, value) =>{
     //     let errors = this.state.formErrors;
     //     let isPasswordValid = this.state.isPasswordValid;
@@ -92,47 +99,63 @@ class company extends Component {
     //         this.state.isPhoneValid
     //     });
     //   }
-    //   onClickSignUp=(e)=>{
-    //     e.preventDefault();
-    //     axios.post('http://localhost:5001/users',{
-    //       name: this.state.name,
-    //       user_id: this.state.password,
-    //       email: this.state.email,
-    //       mobile: this.state.mobile,
-    //       role: 'user'
-    //     })
-    //     .then((res)=>{
-    //       console.log(res);
-    //       localStorage.setItem("currentUser",JSON.stringify(res.data))
-    //       return this.props.history.push('/');
-    //     }
+      onClickSignUp=(e)=>{
+        e.preventDefault();
+        // axios.post('http://localhost:5001/jobs',{
+        //   name: currentUser.name,
+        //   job_id: Math.floor(Math.random()*90000) + 10000,
+        //   email:currentUser.email,
+        //   salary: this.state.salary,
+        //   sector: 'IT',
+        //  // location:this.state.location,
+        //   position:this.state.designation,
+        //   role: 'company'
+        // })
+        // .then((res)=>{
+        //  console.log(res)
+        //  return this.props.history.push('/');
+        // }
     
-    //     )
-    //   }
-    // render() {
-    //     //console.log()
-    //     return (
-    //         <div>
-                
-    //             <form >
-    //             <h2> Hello {currentUser.name} </h2>
+        // )
+        this.props.postJob({
+            name: currentUser.name,
+            job_id: Math.floor(Math.random()*90000) + 10000,
+            email:currentUser.email,
+            salary: this.state.salary,
+            sector: 'IT',
+           // location:this.state.location,
+            position:this.state.designation,
+            role: 'company'
+          })
+          return this.props.history.push('/');
+      }
+    render() {
+        //console.log()
+        return (
+            <div>
+              <Appheader/>
+                <div className='content'>
+                <form >
+                <h2> Hello {currentUser.name} </h2>
 
-    //           <div>
-    //             <ErrorHandler className='err' errorList={this.state.formErrors} />
-    //           </div>
-    //           <label>Name</label>
-    //           <Input inputType={'text'} inputName={'name'} inputPlaceholder={'Name'} inputValue={this.state.name} inputChange={this.onChange}></Input>
-    //           <label>Email</label>
-    //           <Input inputType={'email'} inputName={'email'} inputPlaceholder={'Email'} inputValue={this.state.email} inputChange={this.onChange}></Input>
-    //           <label>Mobile</label>
-    //           <Input inputType={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} input_vinputValuealue={this.state.mobile} inputChange={this.onChange}></Input>
-    //           <label>Password</label>
-    //           <Input inputType={'password'} inputName={'password'} inputPlaceholder={'Password'} inputValue={this.state.password} inputChange={this.onChange}></Input><br></br>
-    //           <Button buttonType={'submit'} buttonClick={this.onClickSignUp} buttonName={'Submit'}></Button>
-    //         </form>
-    //         </div>
+              {/* <div>
+                <ErrorHandler className='err' errorList={this.state.formErrors} />
+              </div> */}
+              <label>Designamtion</label>
+              <Input inputType={'text'} inputName={'designation'} inputPlaceholder={'designation'} inputValue={this.state.designation} inputChange={this.onChange}></Input>
+              <label>Salary</label>
+              <Input inputType={'number'} inputName={'salary'} inputPlaceholder={'salary'} inputValue={this.state.salary} inputChange={this.onChange}  ></Input>
+              <label>location</label>
+              <Input inputType={'text'} inputName={'location'} inputPlaceholder={'location'} inputValue={this.state.location} inputChange={this.onChange}  ></Input>
+              {/* <label>Password</label>
+              <Input inputType={'password'} inputName={'password'} inputPlaceholder={'Password'} inputValue={this.state.password} inputChange={this.onChange}></Input><br></br> */}
+              <Button buttonType={'submit'} buttonClick={this.onClickSignUp} buttonName={'Add Job'}></Button>
+            </form>
+            </div>
+            <Appfooter/>
+            </div>
 
-    //     );
-    // }
+        );
+    }
 }
 export default company;
