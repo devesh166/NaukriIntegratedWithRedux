@@ -12,11 +12,12 @@ class Signup extends Component {
     super(props)
 
     this.state = {
-
+      currentUser:{},
       name: '',
       password: '',
       email: '',
       mobile: '',
+      role:'',
       formErrors: { name: '', email: '', password: '', mobile: '', login_email: '', login_password: '' },
       isNameValid: false,
       isEmailValid: false,
@@ -29,6 +30,19 @@ class Signup extends Component {
 
 
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ currentUser: nextProps.currentUser }, () => {
+        //  console.log(this.state.currentUser)
+        localStorage.setItem("currentUser", JSON.stringify(nextProps.currentUser));
+        if (nextProps.currentUser.role == 1) {
+            return this.props.history.push('/company')
+        } else {
+            return this.props.history.push('/')
+        }
+    })
+    console.log(nextProps)
+
+}
 
 
   onChange = (event) => {
@@ -65,7 +79,10 @@ class Signup extends Component {
         isNameValid = value.match(/^[a-zA-Z]+$/);;
         errors.name = isNameValid ? '' : ' is required';
         break;
-
+        // case 'role':
+        // isRoleValid = value.match(/^[a-zA-Z]+$/);;
+        // errors.name = isRoleValid ? '' : ' is required';
+        break;
       default:
         break;
     }
@@ -75,6 +92,7 @@ class Signup extends Component {
       isPasswordValid: isPasswordValid,
       isNameValid: isNameValid,
       isPhoneValid: isPhoneValid
+
     }, this.validation());
   }
   componentWillMount(){
@@ -92,20 +110,29 @@ class Signup extends Component {
   }
   onClickSignUp=(e)=>{
     e.preventDefault();
-    axios.post('http://localhost:5001/users',{
+    this.props.postUser({
       name: this.state.name,
       user_id: this.state.password,
       email: this.state.email,
       mobile: this.state.mobile,
-      role: 'user'
-    })
-    .then((res)=>{
-      console.log(res);
-      localStorage.setItem("currentUser",JSON.stringify(res.data))
-      return this.props.history.push('/');
-    }
+      role: this.state.role
+    });
+    //localStorage.setItem("currentUser",JSON.stringify(res.data))
 
-    )
+    // axios.post('http://localhost:5001/users',{
+    //   name: this.state.name,
+    //   user_id: this.state.password,
+    //   email: this.state.email,
+    //   mobile: this.state.mobile,
+    //   role: 'user'
+    // })
+    // .then((res)=>{
+    //   console.log(res);
+    //   localStorage.setItem("currentUser",JSON.stringify(res.data))
+    //   return this.props.history.push('/');
+    // }
+
+    // )
   }
   render() {
     return (
@@ -125,6 +152,9 @@ class Signup extends Component {
               <Input inputType={'email'} inputName={'email'} inputPlaceholder={'Email'} inputValue={this.state.email} inputChange={this.onChange}></Input>
               <label>Mobile</label>
               <Input inputType={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} input_vinputValuealue={this.state.mobile} inputChange={this.onChange}></Input>
+              <label>Role</label>
+              <Input inputType={'tel'} inputName={'role'} inputPlaceholder={'role'} input_vinputValuealue={this.state.role} inputChange={this.onChange}></Input>
+
               <label>Password</label>
               <Input inputType={'password'} inputName={'password'} inputPlaceholder={'Password'} inputValue={this.state.password} inputChange={this.onChange}></Input><br></br>
               <Button buttonType={'submit'} buttonClick={this.onClickSignUp} buttonName={'Submit'}></Button>

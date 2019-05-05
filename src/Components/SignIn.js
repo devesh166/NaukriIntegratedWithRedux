@@ -13,7 +13,7 @@ class SignIn extends Component {
         super(props)
 
         this.state = {
-            currentUser: [],
+            currentUser: {},
             login_email: '',
             login_password: '',
             formErrors: { login_email: '', login_password: '' },
@@ -33,19 +33,19 @@ class SignIn extends Component {
             this.props.history.push('/');
         }
     }
-    componentWillReceiveProps(nextProps){
-        this.setState({ currentUser: nextProps.currentUser},()=>{
-        //  console.log(this.state.currentUser)
-        localStorage.setItem("currentUser", JSON.stringify( nextProps.currentUser[0]));
-        if(nextProps.currentUser[0].role==1){
-                            return this.props.history.push('/company')
-                        }else{
-                            return this.props.history.push('/')
-                        }
+    componentWillReceiveProps(nextProps) {
+        this.setState({ currentUser: nextProps.currentUser }, () => {
+            //  console.log(this.state.currentUser)
+            localStorage.setItem("currentUser", JSON.stringify(nextProps.currentUser));
+            if (nextProps.currentUser.role == 1) {
+                return this.props.history.push('/company')
+            } else {
+                return this.props.history.push('/')
+            }
         })
-      console.log(nextProps)
-      
-      }
+        console.log(nextProps)
+
+    }
 
     onChange = (event) => {
         let key = event.target.name;
@@ -102,7 +102,7 @@ class SignIn extends Component {
     //         })
     // }
 
-    
+
     onClickSignIn = (e) => {
         e.preventDefault();
         // this.state.userData.map((ele, ind) => {
@@ -130,16 +130,16 @@ class SignIn extends Component {
         //     console.log(this.state.currentUser)
         //    //localStorage.setItem("currentUser", JSON.stringify(this.state.currentUser[0]));
         //   })
-       // console.log(this.state.currentUser)
-       //return this.props.history.push('/');
-    
+        // console.log(this.state.currentUser)
+        //return this.props.history.push('/');
+
         // this.setState({
         //     currentUser: this.state.currentUser
         //         },()=>{
         //             console.log(this.state.currentUser)
         //              })
-       // console.log(this.state.user)
-       
+        // console.log(this.state.user)
+
         //localStorage.setItem("currentUser", JSON.stringify(this.state.user));
         //return  this.props.history.push('/');
         // if (this.state.user) {

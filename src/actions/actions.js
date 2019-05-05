@@ -9,7 +9,7 @@ import axios from 'axios';
 //         })
 //     };
 // }
-export const getJobsSucess=(data)=>{
+export const getJobsSucess = (data) => {
     return {
         type: "GET_JOBS",
         payload: data
@@ -18,19 +18,19 @@ export const getJobsSucess=(data)=>{
 
 
 
-export const getJobs=(company) =>{
+export const getJobs = (company) => {
     var url;
-    
-    if(company){
-        url=`http://localhost:5001/jobs/${company}`
-    }else{
-        url='http://localhost:5001/jobs/';
+
+    if (company) {
+        url = `http://localhost:5001/jobs/${company}`
+    } else {
+        url = 'http://localhost:5001/jobs/';
     }
 
     return dispatch => {
         //console.log('in action')
         axios.get(url).then((res) => {
-           // console.log(res.data);
+            // console.log(res.data);
             dispatch(getJobsSucess(res.data))
         }).catch((err) => {
             return err;
@@ -41,7 +41,7 @@ export const getJobs=(company) =>{
 
 
 
-export const postJobSucess=(data)=>{
+export const postJobSucess = (data) => {
     return {
         type: "POST_JOB",
         payload: data
@@ -50,16 +50,16 @@ export const postJobSucess=(data)=>{
 
 
 
-export const postJob=(company) =>{
+export const postJob = (company) => {
     var url;
-   
+
     console.log(company)
-  
-    url='http://localhost:5001/jobs/';
+
+    url = 'http://localhost:5001/jobs/';
     return dispatch => {
         //console.log('in action')
-        axios.post(url,company).then((res) => {
-          // console.log(res.data);
+        axios.post(url, company).then((res) => {
+            // console.log(res.data);
             dispatch(postJobSucess(res.data))
         }).catch((err) => {
             return err;
@@ -73,7 +73,7 @@ export const postJob=(company) =>{
 
 
 
-export const getUserSucess=(data)=>{
+export const getUserSucess = (data) => {
     return {
         type: "GET_USER",
         payload: data
@@ -82,17 +82,44 @@ export const getUserSucess=(data)=>{
 
 
 
-export const getUser=(user) =>{
+export const getUser = (user) => {
     var url;
-   
-  //  console.log(user)
-  
-    url='http://localhost:5001/login';
+
+    //  console.log(user)
+
+    url = 'http://localhost:5001/login';
     return dispatch => {
         //console.log('in action')
-        axios.post(url,user).then((res) => {
-           console.log(res.data);
+        axios.post(url, user).then((res) => {
+            console.log(res.data);
             dispatch(getUserSucess(res.data))
+        }).catch((err) => {
+            return err;
+        })
+
+    }
+}
+
+export const postUserSucess = (data) => {
+    return {
+        type: "POST_USER",
+        payload: data
+    }
+}
+
+
+
+export const postUser = (user) => {
+    var url;
+
+    //  console.log(user)
+
+    url = 'http://localhost:5001/users';
+    return dispatch => {
+        //console.log('in action')
+        axios.post(url, user).then((res) => {
+            console.log(res.data);
+            dispatch(postUserSucess(res.data))
         }).catch((err) => {
             return err;
         })
@@ -112,5 +139,5 @@ export const getUser=(user) =>{
 
 // export const getJobSkills = () => {
 
-   
+
 // }

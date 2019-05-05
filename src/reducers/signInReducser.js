@@ -8,6 +8,13 @@ const jobReducer = (state = {}, action)=> {
                 
             };
         }
+        case 'POST_USER':{
+            return state = {
+                ...state,
+                data: action.payload
+                
+            };
+        }
       
         default:
             return state;

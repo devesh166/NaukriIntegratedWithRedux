@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 import Home from './containers/jobContainer'
 //import Home from './Components/home'
 import SignIn from './containers/signInContainer'
-import SignUp from './Components/SignUp'
+import SignUp from './containers/signUpContainer'
 import Company from './containers/companyContainer'
 
 // import { createStore } from 'redux';
