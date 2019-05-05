@@ -1,22 +1,13 @@
 const jobReducer = (state = {}, action)=> {
     switch (action.type) {
-        case 'GET_JOBS':{
-
+       
+        case 'GET_USER':{
             return state = {
                 ...state,
                 data: action.payload
                 
             };
         }
-        case 'POST_JOB':{
-
-            return state = {
-                ...state
-                // data: action.payload
-                
-            };
-        }
-        
       
         default:
             return state;

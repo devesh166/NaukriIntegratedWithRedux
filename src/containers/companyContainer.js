@@ -5,15 +5,6 @@ import {postJob} from '../actions/actions'
 
 
 
-
-// const mapStateToProps=(state)=>{
-//   //  console.log(state)
-//    return {
-       
-//        jobs:state.fetchJobs.data
-//    }
-// }
-
 const mapDispatchtoProps=(dispatch)=>{
     
     return {

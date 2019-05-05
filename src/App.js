@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom'
 
 import Home from './containers/jobContainer'
 //import Home from './Components/home'
-import SignIn from './Components/SignIn'
+import SignIn from './containers/signInContainer'
 import SignUp from './Components/SignUp'
 import Company from './containers/companyContainer'
 
