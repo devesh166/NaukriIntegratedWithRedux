@@ -15,11 +15,8 @@ const mapStateToProps=(state)=>{
 const mapDispatchtoProps=(dispatch)=>{
     
     return {
-        //dispatch,
         postUser: (user)=>dispatch(postUser(user)) ,
-       // getJobSkills: () => dispatch(getJobSkills()),
-
-    }
+        }
 }
 export default connect(mapStateToProps,mapDispatchtoProps)(SignUp)
 

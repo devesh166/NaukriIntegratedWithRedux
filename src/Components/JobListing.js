@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from './Button'
 import "./style.css"
 var temp;
 var currentUser;
@@ -27,11 +28,14 @@ class jobListing extends Component {
         }
        
     }
+    editjobs=(e)=>{
+       // e.preventDefault();
+
+        console.log(e)
+    }
 
     render() {
-        // this.setState(()=>{
-        //     this.state = this.props.filterList;
-        // })
+    
 
         if (this.state.company == '' && this.state.location == '' && this.state.designation == '') {
             temp = this.props.jobs;
@@ -75,13 +79,12 @@ class jobListing extends Component {
                         <div className="row" >
                         < div className="col-sm-2 jobDetails" >{count++}</div>
                             <div className="col-sm-2" > <img src={require("./paris.jpg")} height="50pt" width="50pt" alt="paris.jpg"></img></div>
-                            
                             < div className="col-sm-2 jobDetails">Gurgaon</div>
                             {/* this.props.jobs[ind].position */}
                             < div className="col-sm-2 jobDetails">{this.props.jobs[ind].position}</div>
                             < div className="col-sm-2 jobDetails" >{this.props.jobs[ind].salary}</div>
 
-                            {localStorage.getItem('currentUser')?( currentUser.role < 2 ? '' : <button className="w3-button w3-block w3-dark-grey">Apply</button>):<button disabled='true' className="w3-button w3-block w3-dark-grey" >Login to Apply</button>}
+                            {localStorage.getItem('currentUser')?( currentUser.role < 2 ? (currentUser.name==this.props.jobs[ind].name ?<button onClick={()=>{this.editjobs(this.props.jobs[ind])}} className="w3-button w3-block w3-dark-grey"  >Edit</button>:'') : <button className="w3-button w3-block w3-dark-grey">Apply</button>):<button disabled='true' className="w3-button w3-block w3-dark-grey" >Login to Apply</button>}
 
                         </div>
                     </div>

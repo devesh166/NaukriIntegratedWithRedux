@@ -7,8 +7,12 @@ class appHeader extends Component {
     SignInMenu() {
         this.nextPath('/signin')
     }
-    SignUpMenu() {
+    SignUpMenu=()=> {
         this.nextPath('/signup')
+    }
+    logout=()=>{
+        console.log("logged out")
+        localStorage.removeItem('currentUser')
     }
 
     render() {
@@ -41,7 +45,7 @@ class appHeader extends Component {
 
                         </li>
                         <li>
-                            <Link to="/" ><span onClick = {()=>{localStorage.removeItem('currentUser')}}>Logout</span></Link>
+                            <Link to="/" ><span onClick = {this.logout}>Logout</span></Link>
                         </li>
                     </ul>
                         :
