@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import Home from '../Components/home'
 import  {connect} from  "react-redux";
-import {getJobs} from '../actions/actions'
+import {getJobs,getAppliedJobs} from '../actions/actions'
 
 
 
 
 const mapStateToProps=(state)=>{
-  //  console.log(state)
+  console.log(state.fetchJobs)
    return {
-       
-       jobs:state.fetchJobs.data
+   // fetchJobs:'state.fetchJobs',
+    applied : state.fetchJobs.applied,
+    jobs:state.fetchJobs.data
+     
+
    }
 }
 
@@ -19,6 +22,7 @@ const mapDispatchtoProps=(dispatch)=>{
     return {
         //dispatch,
         getJobs: (company)=>dispatch(getJobs(company)) ,
+        getAppliedJobs: (user) => dispatch(getAppliedJobs(user))
        // getJobSkills: () => dispatch(getJobSkills()),
 
     }

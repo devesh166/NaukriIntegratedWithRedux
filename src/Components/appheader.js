@@ -11,14 +11,14 @@ class appHeader extends Component {
         this.nextPath('/signup')
     }
     logout=()=>{
-        console.log("logged out")
+       // console.log("logged out")
         localStorage.removeItem('currentUser')
     }
 
     render() {
        if(localStorage.getItem("currentUser")){
         var currentUser = JSON.parse(localStorage.getItem("currentUser"))
-        console.log(currentUser);
+        //console.log(currentUser);
       
        }
         

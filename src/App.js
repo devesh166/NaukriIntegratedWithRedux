@@ -4,6 +4,7 @@ import Home from './containers/jobContainer'
 import SignIn from './containers/signInContainer'
 import SignUp from './containers/signUpContainer'
 import Company from './containers/companyContainer'
+import EditJobs from './containers/editJobsContainer'
 
 export default class App extends  Component  {
 
@@ -12,12 +13,11 @@ export default class App extends  Component  {
    
     return (
      
-      
-      
       <BrowserRouter>
         <Route exact path='/' component={Home} />
         <Route path='/signin' component={SignIn} />
         <Route path='/signup' component={SignUp} />
+        <Route path='/editjobs/:job' component={EditJobs} />
         <Route path='/company' component={Company} />
       </BrowserRouter>
       

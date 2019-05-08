@@ -18,11 +18,13 @@ class Signup extends Component {
       email: '',
       mobile: '',
       role:'',
+      location: '',
       formErrors: { name: '', email: '', password: '', mobile: '', login_email: '', login_password: '' },
       isNameValid: false,
       isEmailValid: false,
       isPasswordValid: false,
       isPhoneValid: false,
+      isRoleValid:false,
       formValid: false,
       SignIn: true,
 
@@ -59,6 +61,7 @@ class Signup extends Component {
     let isNameValid = this.state.isPasswordValid;
     let isPhoneValid = this.state.isPhoneValid;
     let isEmailValid = this.state.isEmailValid;
+    let isRoleValid = this.state.isRoleValid;
 
     switch (fieldName) {
       case 'mobile':
@@ -71,17 +74,17 @@ class Signup extends Component {
         errors.email = isEmailValid ? '' : 'invalid';
         break;
       case 'password':
-       // isPasswordValid = (value.length) >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
-       isPasswordValid =true;
+       isPasswordValid = (value.length) >= 8 && value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+       //isPasswordValid =true;
        errors.password = isPasswordValid ? '' : 'is too Weak';
         break;
       case 'name':
-        isNameValid = value.match(/^[a-zA-Z]+$/);;
+        isNameValid = value.match(/^[a-zA-Z]+$/);
         errors.name = isNameValid ? '' : ' is required';
         break;
-        // case 'role':
-        // isRoleValid = value.match(/^[a-zA-Z]+$/);;
-        // errors.name = isRoleValid ? '' : ' is required';
+      case 'role':
+        isRoleValid = value.match(/^[a-zA-Z]+$/);;
+        errors.role = isRoleValid ? '' : ' is required';
         break;
       default:
         break;
@@ -105,34 +108,20 @@ class Signup extends Component {
       formValid: this.state.isEmailValid &&
         this.state.isPasswordValid &&
         this.state.isNameValid &&
-        this.state.isPhoneValid
+        this.state.isPhoneValid &&
+        this.state.isRoleValid
     });
   }
   onClickSignUp=(e)=>{
     e.preventDefault();
     this.props.postUser({
       name: this.state.name,
-      user_id: this.state.password,
+      password: this.state.password,
       email: this.state.email,
       mobile: this.state.mobile,
       role: this.state.role
     });
-    //localStorage.setItem("currentUser",JSON.stringify(res.data))
-
-    // axios.post('http://localhost:5001/users',{
-    //   name: this.state.name,
-    //   user_id: this.state.password,
-    //   email: this.state.email,
-    //   mobile: this.state.mobile,
-    //   role: 'user'
-    // })
-    // .then((res)=>{
-    //   console.log(res);
-    //   localStorage.setItem("currentUser",JSON.stringify(res.data))
-    //   return this.props.history.push('/');
-    // }
-
-    // )
+ 
   }
   render() {
     return (
@@ -151,10 +140,10 @@ class Signup extends Component {
               <label>Email</label>
               <Input inputType={'email'} inputName={'email'} inputPlaceholder={'Email'} inputValue={this.state.email} inputChange={this.onChange}></Input>
               <label>Mobile</label>
-              <Input inputType={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} input_vinputValuealue={this.state.mobile} inputChange={this.onChange}></Input>
+              <Input inputType={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} inputValue={this.state.mobile} inputChange={this.onChange}></Input>
               <label>Role</label>
-              <Input inputType={'tel'} inputName={'role'} inputPlaceholder={'role'} input_vinputValuealue={this.state.role} inputChange={this.onChange}></Input>
-
+              <Input inputType={'tel'} inputName={'role'} inputPlaceholder={'role'} inputValue={this.state.role} inputChange={this.onChange}></Input>
+              
               <label>Password</label>
               <Input inputType={'password'} inputName={'password'} inputPlaceholder={'Password'} inputValue={this.state.password} inputChange={this.onChange}></Input><br></br>
               <Button buttonType={'submit'} buttonClick={this.onClickSignUp} buttonName={'Submit'}></Button>
