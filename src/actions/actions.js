@@ -49,7 +49,10 @@ export const getJobs = (company) => {
                 // 
                 // dispatch(getAppliedJobs({ user_id :currentUser._id}))
                 let pr = new Promise ( (resolve,reject)=>{
-                   dispatch(getAppliedJobs({ user_id :currentUser._id}))
+                    if(currentUser){
+                        dispatch(getAppliedJobs({ user_id :currentUser._id}))
+                    }
+                   
                     resolve();
                 })
                 pr.then(()=>{
@@ -109,7 +112,39 @@ export const postJob = (company) => {
 }
 
 
+//----------get all users-------
+export const getAllUsersSucess = (data) => {
+    return {
+        type: "GET_ALL_USER",
+        payload: data
+    }
+}
 
+
+
+export const getAllUsers = () => {
+    var url;
+
+     // console.log("in fn")
+
+    url = 'http://localhost:5001/users';
+    return dispatch => {
+        //console.log('in action')
+        axios.get(url).then((res) => {
+           //  console.log(res.data);
+
+            if (res.data.errors) {
+                window.alert(JSON.stringify(res.data.message))
+            } else{
+                dispatch(getAllUsersSucess(res.data))
+            }
+            
+        }).catch((err) => {
+            alert(err);
+        })
+
+    }
+}
 
 
 
@@ -132,7 +167,6 @@ export const getUser = (user) => {
         //console.log('in action')
         axios.post(url, user).then((res) => {
              console.log(res.data);
-
             if (res.data.errors) {
                 window.alert(JSON.stringify(res.data.message))
             } else{
@@ -146,7 +180,36 @@ export const getUser = (user) => {
     }
 }
 
+//--------update Job status-----
+export const  changeJobStatusSucess = (data) => {
+    return {
+        type: "CHANGE_JOB_STATUS",
+        payload: data
+    }
+}
 
+
+
+export const changeJobStatus = (user) => {
+    var url; 
+    url = 'http://localhost:5001/apply';
+    return dispatch => {
+        //console.log('in action')
+        axios.put(url, user).then((res) => {
+             console.log(res.data);
+
+            if (res.data.errors) {
+                window.alert(JSON.stringify(res.data.message))
+            } else{
+                dispatch(changeJobStatusSucess(res.data))
+            }
+            
+        }).catch((err) => {
+            alert(err);
+        })
+
+    }
+}
 
 
 
@@ -168,13 +231,13 @@ export const getAppliedJobs = (user) => {
 
     url = 'http://localhost:5001/applied';
     return dispatch => {
-        console.log(user)
+       // console.log(user)
         axios.post(url, user)
             .then((res) => {
                 if (res.data.errors) {
                     window.alert(JSON.stringify(res.data.message))
                 } else {
-                    console.log(res.data)
+                   // console.log(res.data)
                     // let pr = new Promise((resolve, reject) => {
                     //     
                      dispatch(getAppliedJobsSucess(res.data))
@@ -184,6 +247,94 @@ export const getAppliedJobs = (user) => {
 
                     //     dispatch(getJobs())
                     // })
+
+                    
+                }
+ 
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
+
+    }
+}
+//---------get list of applied users----
+// export const getUserListSucess = (data) => {
+//     return {
+//         type: "APPLIED_USERS_List",
+//         payload: data
+//     }
+// }
+
+
+
+// export const getUserList = (appliedUsers) => {
+     
+//     var userList1=[];
+
+//      //console.log('feched data', appliedUsers)
+//     return dispatch => {
+
+//         var size =  appliedUsers.length
+//          appliedUsers.map((ele, ind) => {
+//             axios.get(`http://localhost:5001/users/${ele.user_id}`)
+//             .then((res) => {
+//                 if (res.data.errors) {
+//                     window.alert(JSON.stringify(res.data.message))
+//                 } else {
+//                     userList1.push(res.data)  
+                     
+//                 }
+//             })
+//             size--;
+//             if (size === 0) {
+//                // console.log('dispach data',userList1)
+//                 return dispatch(getUserListSucess(userList1))
+//             }
+//             //console.log(size)
+//         })
+
+
+//     }
+// }
+//---------applied user-----
+ 
+export const getAppliedUsersSucess = (data) => {
+    return {
+        type: "APPLIED_USERS",
+        payload: data
+    }
+}
+
+
+
+export const getAppliedUsers = (user) => {
+    var url;
+
+
+    url = 'http://localhost:5001/appliedUsers';
+    return dispatch => {
+      //  console.log(user)
+        axios.post(url, user)
+            .then((res) => {
+                if (res.data.errors) {
+                    window.alert(JSON.stringify(res.data.message))
+                } else {
+                   // console.log(res.data)
+                    // 
+                    // 
+                    // dispatch(getAllUsers())
+                    // dispatch(getAppliedUsersSucess(res.data))
+                   // dispatch(getUserList(res.data))
+                    let pr = new Promise((resolve, reject) => {
+                        
+                        dispatch(getAllUsers())
+                        resolve();
+                    })
+                    pr.then(() => {
+                       dispatch(getAppliedUsersSucess(res.data))
+                       
+                    })
 
                     
                 }
@@ -266,11 +417,12 @@ export const postUser = (user) => {
     var url;
 
 
-    url = 'http://localhost:5001/users';
+    url = 'http://localhost:5001/signUp';
     return dispatch => {
-        console.log(user)
+       
         axios.post(url, user)
             .then((res) => {
+                console.log(res)
                 if (res.data.errors) {
                     window.alert(JSON.stringify(res.data.message))
                 } else {
@@ -300,7 +452,6 @@ export const updateJobSucess = (data) => {
 
 export const updateJobs = (job) => {
     var url;
-
     url = 'http://localhost:5001/jobs';
     return dispatch => {
         console.log(job)

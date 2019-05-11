@@ -8,7 +8,25 @@ const jobReducer = (state = {}, action)=> {
                 
             };
         }
+        case 'GET_ALL_USER':{
+            return state = {
+                ...state,
+                users: action.payload
+                
+            };
+        }
+        
+        
         case 'POST_JOB':{
+            //return;
+            return state = {
+                ...state
+                // data: action.payload
+                
+            };
+        }
+         
+        case 'CHANGE_JOB_STATUS':{
             //return;
             return state = {
                 ...state
@@ -40,6 +58,25 @@ const jobReducer = (state = {}, action)=> {
             return state = {
                 ...state,
                 applied: action.payload
+                
+            };
+        }
+        case 'APPLIED_USERS':{
+            //return;
+            //console.log(action.payload)
+            return state = {
+                ...state,
+                appliedUsers: action.payload
+                
+            };
+        }
+        
+        case 'APPLIED_USERS_List':{
+            //return;
+            //console.log(action.payload)
+            return state = {
+                ...state,
+                userList: action.payload
                 
             };
         }

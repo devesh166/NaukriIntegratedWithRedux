@@ -34,6 +34,7 @@ class SignIn extends Component {
         }
     }
     componentWillReceiveProps(nextProps) {
+        console.log('in componet will upd')
         this.setState({ currentUser: nextProps.currentUser }, () => {
             //  console.log(this.state.currentUser)
             localStorage.setItem("currentUser", JSON.stringify(nextProps.currentUser));
@@ -101,6 +102,7 @@ class SignIn extends Component {
             email: this.state.login_email,
             password: this.state.login_password
         });
+        
    
 
     }

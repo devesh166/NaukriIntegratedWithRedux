@@ -17,7 +17,8 @@ export default class Home extends Component {
       company: '',
       location: '',
       designation: '',
-      jobs: []
+      jobs: [],
+      applied:[]
     }
 
 
@@ -55,19 +56,7 @@ export default class Home extends Component {
 
   // }
   componentWillReceiveProps(nextProps) {
-    // if (localStorage.getItem('currentUser')) {
-    //   console.log('in condition')
-
-    //   currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    //   if (currentUser.role < 2) {
-    //     this.props.getJobs(currentUser.name)
-    //   } else {
-    //     this.props.getJobs();
-    //   }
-    // } else {
-    //   this.props.getJobs();
-    // }
-    // console.log("in component will recieve props")
+     
     if (this.state !== nextProps) {
       //console.log(this.state )
       this.setState({applied : nextProps.applied})
@@ -83,9 +72,9 @@ export default class Home extends Component {
     if (localStorage.getItem('currentUser')) {
       console.log('in condition')
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      this.props.getAppliedJobs({
-        user_id: currentUser._id
-      })
+      // this.props.getAppliedJobs({
+      //   user_id: currentUser._id
+      // })
      
       if (currentUser.role < 2) {
         console.log(this.props.getJobs(currentUser.name))
@@ -126,8 +115,10 @@ export default class Home extends Component {
       <div className="App">
 
         <AppHeader />
-        <JobFilter filter={this.state} onfilterchange={(temp) => { this.changeFilter(temp) }} />
+        <JobFilter filter={this.state} onfilterchange={(temp) => {  this.changeFilter(temp) }} />
+        <div className='container-fluid'>
         <JobListing filterList={this.state} applied = {this.state.applied} jobs={this.state.jobs.reverse()} />
+        </div>
         <AppFooter />
 
 

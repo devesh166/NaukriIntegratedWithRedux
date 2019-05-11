@@ -1,5 +1,53 @@
-.box{
-}
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15pt;
+  }
+  
+  /* Float four columns side by side */
+  .column {
+    float: left;
+    width: 23%;
+    padding: 0 10px;
+    margin: 15px;
+  }
+  .notFound{
+    margin-top: 25%;
+  }
+  
+  /* Remove extra left and right margins, due to padding */
+  .row {margin: 0 -5px;}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    margin: 15px;
+  }
+  
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+  
+  /* Style the counter cards */
+  .card1 {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+  }
+  .card1:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
 
 .card{
    background-color: beige;
@@ -12,6 +60,7 @@
 .image{
     /* margin: 1px; */
     padding: 3px;
+    margin-top: 5pt;
      border-radius: 100px;
  -webkit-border-radius: 100px;
  -moz-border-radius: 100px;
@@ -19,6 +68,9 @@
 }
 .companyName{
     background-color: #007b5e;
+    padding: 1pt 2pt 2pt 2pt;
+    color: #f1f1f1;
+    border-radius: 25px;
 }
 .menu{
     
@@ -28,11 +80,14 @@
 }
 
 .content{
-    margin-top: 50px;
+    margin-top: 10%;
+    margin-left: 30%;
     padding: 10px;
     border-style: solid;
-    margin: 10px;
+    align-items: center;
     color: seagreen;
+    width: 30%;
+    text-align: center;
     background: beige;
 }
 
@@ -43,6 +98,9 @@
 .btn{
     padding: 2px 30px 2px 30px;
     margin: 10px
+}
+.btn1{
+    border-radius: 25px;
 }
 
 .subcard{
@@ -55,74 +113,13 @@
     padding: 20pt;
     
 }
-
-/* Footer */
-
-section {
-    padding: 60px 0 ;
-    margin-top: 60px;
-    
-}
-
-section .section-title {
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 3pt;
+    width: 100%;
+    background-color: #000000;
+    color: gray;
     text-align: center;
-    color: #007b5e;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-}
-#footer {
-    background: #007b5e !important;
-}
-#footer h5{
-	padding-left: 10px;
-    border-left: 3px solid #eeeeee;
-    padding-bottom: 6px;
-    margin-bottom: 20px;
-    color:#ffffff;
-}
-#footer a {
-    color: #ffffff;
-    text-decoration: none !important;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
-#footer ul.social li{
-	padding: 3px 0;
-}
-#footer ul.social li a i {
-    margin-right: 5px;
-	font-size:25px;
-	-webkit-transition: .5s all ease;
-	-moz-transition: .5s all ease;
-	transition: .5s all ease;
-}
-#footer ul.social li:hover a i {
-	font-size:30px;
-	margin-top:-10px;
-}
-#footer ul.social li a,
-#footer ul.quick-links li a{
-	color:#ffffff;
-}
-#footer ul.social li a:hover{
-	color:#eeeeee;
-}
-#footer ul.quick-links li{
-	padding: 3px 0;
-	-webkit-transition: .5s all ease;
-	-moz-transition: .5s all ease;
-	transition: .5s all ease;
-}
-#footer ul.quick-links li:hover{
-	padding: 3px 0;
-	margin-left:5px;
-	font-weight:700;
-}
-#footer ul.quick-links li a i{
-	margin-right: 5px;
-}
-#footer ul.quick-links li:hover a i {
-    font-weight: 700;
-}
-
-
+  }
