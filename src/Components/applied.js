@@ -168,9 +168,9 @@ export default class applied extends Component {
             <AppHeader />
             <div>
                 <form>
-                    <input type="text" placeholder="Designation" onChange={this.onInputChange} name='designation'></input>
-                    <input type="text" placeholder="Location" onChange={this.onInputChange} name='location' style={{ margin: 10 }}></input>
-                    <input type="text" placeholder="Status" onChange={this.onInputChange} name='status'></input>
+                    <input style={{   borderRadius: 10,padding: 5 }} type="text" placeholder="Designation" onChange={this.onInputChange} name='designation'></input>
+                    <input style={{  margin:10, borderRadius: 10,padding: 5 }} type="text" placeholder="Location" onChange={this.onInputChange} name='location' ></input>
+                    <input  style={{   borderRadius: 10,padding: 5 }}type="text" placeholder="Status" onChange={this.onInputChange} name='status'></input>
                     {/* <button style={{ margin: 10 }} onClick={this.onButtonClick}>Filter</button> */}
                 </form>
             </div>
@@ -184,7 +184,7 @@ export default class applied extends Component {
                             .map((element, index) => {
 
                                 return (
-                                    <div className='column' >
+                                    <div className='column1' >
                                         <div className=" row  ">
                                             <div className="card1">
 

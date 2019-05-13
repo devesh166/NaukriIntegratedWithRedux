@@ -28,10 +28,10 @@ class jobFilter extends Component {
 
             <div>
                 <form>
-                    <input type="text" placeholder="Company" onChange={this.onInputChange} name='company'></input>
-                    <input type="text" placeholder="Location" onChange={this.onInputChange} name='location' style={{ margin: 10 }}></input>
-                    <input type="text" placeholder="Designation" onChange={this.onInputChange} name='designation'></input>
-                    <button style={{ margin: 10 }} onClick={this.onButtonClick}>Filter</button>
+                    <input style={{   borderRadius: 10,padding: 5 }} type="text" placeholder="Company" onChange={this.onInputChange} name='company'></input>
+                    <input  style={{   margin: 10, borderRadius: 10,padding: 5 }}type="text" placeholder="Location" onChange={this.onInputChange} name='location'  ></input>
+                    <input style={{  borderRadius: 10,padding: 5 }} type="text" placeholder="Designation" onChange={this.onInputChange} name='designation'></input>
+                    <button style={{ margin: 10,  borderRadius: 10,padding: 5 }} style={{ margin: 10,  borderRadius: 10,padding: 5 }} onClick={this.onButtonClick}>Filter</button>
                 </form>
             </div>
         )

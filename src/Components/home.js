@@ -9,6 +9,7 @@ import '../App.css'
 
 var temp;
 var currentUser;
+ 
 export default class Home extends Component {
 
   constructor() {
@@ -23,38 +24,7 @@ export default class Home extends Component {
 
 
   }
-  // componentWillMount(){
-  //   this.props.getJobs();
-  //   this.setState({
-  //     jobs:this.state.jobs
-  //   })
 
-  // }
-
-  // componentDidUpdate(prevProps, prevState){
-  //   console.log("in componentDidUpdate")
-
-  //   if(localStorage.getItem('currentUser')){
-  //     console.log('in condition')   
-
-  //     currentUser=JSON.parse(localStorage.getItem('currentUser'));
-  //     if(currentUser.role<2){     
-  //     console.log(this.props.getJobs(currentUser.name))    
-  //     }else{      
-  //     this.props.getJobs();     
-  //     }
-  //   }else{     
-  //     this.props.getJobs();      
-  //   } 
-
-  //   if(prevProps.jobs != this.state.jobs){
-
-  //     //this.setState({jobs : this.state.jobs},()=>{
-  //        console.log("state changed")
-  //     // })
-  //   }
-
-  // }
   componentWillReceiveProps(nextProps) {
      
     if (this.state !== nextProps) {
@@ -117,7 +87,7 @@ export default class Home extends Component {
         <AppHeader />
         <JobFilter filter={this.state} onfilterchange={(temp) => {  this.changeFilter(temp) }} />
         <div className='container-fluid'>
-        <JobListing filterList={this.state} applied = {this.state.applied} jobs={this.state.jobs.reverse()} />
+        <JobListing filterList={this.state} applied = {this.state.applied} jobs={ this.state.jobs.reverse()} />
         </div>
         <AppFooter />
 

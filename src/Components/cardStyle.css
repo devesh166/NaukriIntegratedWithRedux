@@ -9,6 +9,12 @@ body {
 /* Float four columns side by side */
 .column {
   float: left;
+  width: 23%;
+  padding: 0 10px;
+  margin: 15px;
+}
+.column1 {
+  float: left;
   width: 29%;
   padding: 0 10px;
   margin: 15px;

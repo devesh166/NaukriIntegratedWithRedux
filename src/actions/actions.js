@@ -169,7 +169,10 @@ export const getUser = (user) => {
              console.log(res.data);
             if (res.data.errors) {
                 window.alert(JSON.stringify(res.data.message))
-            } else{
+            }else if(res.data=== ''){
+                window.alert('Invalid Username/ Password')
+            } 
+            else{
                 dispatch(getUserSucess(res.data))
             }
             
@@ -423,9 +426,13 @@ export const postUser = (user) => {
         axios.post(url, user)
             .then((res) => {
                 console.log(res)
-                if (res.data.errors) {
+                if (res.data.errmsg) {
+                    window.alert(`user with eamil id ${user.email} already registered`)
+                } else if(res.data.errors){
                     window.alert(JSON.stringify(res.data.message))
-                } else {
+                }
+                else {
+                    console.log(res)
                     dispatch(postUserSucess(res.data))
                 }
 

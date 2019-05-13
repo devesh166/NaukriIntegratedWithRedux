@@ -28,17 +28,18 @@ class appHeader extends Component {
             <nav className="navbar navbar-inverse">
                 <div className="container-fluid">
                     <div className="navbar-header">
-                        <a className="navbar-brand" href="#">NaukriPao</a>
+                        <img className="navbar-brand" src={require("./logo.png")} ></img>
+                        <a className="navbar-brand" href="">NaukriPao</a>
                     </div>
                     <ul className="nav navbar-nav">
-                        <li> <Link to="/">Home</Link></li>
+                        <li> <Link to="">Home</Link></li>
 
 
                     </ul>
                     {currentUser ? <ul className="nav navbar-nav" style={{ float: "right" }}>
 
                         <li>
-                            <Link to="/signin"> hi {currentUser.name} </Link>
+                            <Link to="/signin"> Hi {currentUser.name} </Link>
                         </li>
                         <li>
                         {localStorage.getItem('currentUser')?( currentUser.role < 2 ? <Link style={{backgroundColor:'#007b5e'}} to='/company'>Add Job</Link> :''):''}

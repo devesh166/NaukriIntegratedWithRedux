@@ -35,7 +35,8 @@ class SignIn extends Component {
     }
     componentWillReceiveProps(nextProps) {
         console.log('in componet will upd')
-        this.setState({ currentUser: nextProps.currentUser }, () => {
+    //   if(nextProps.currentUser !== '') { 
+          this.setState({ currentUser: nextProps.currentUser }, () => {
             //  console.log(this.state.currentUser)
             localStorage.setItem("currentUser", JSON.stringify(nextProps.currentUser));
             if (nextProps.currentUser.role == 1) {
@@ -44,6 +45,9 @@ class SignIn extends Component {
                 return this.props.history.push('/')
             }
         })
+    // }else{
+    //         window.alert('Invalid Username/Password')
+    //     }
         console.log(nextProps)
 
     }

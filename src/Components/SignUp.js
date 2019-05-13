@@ -17,7 +17,7 @@ class Signup extends Component {
       password: '',
       email: '',
       mobile: '',
-      role:'',
+      role:'user',
       location: '',
       formErrors: { name: '', email: '', password: '', mobile: '', login_email: '', login_password: '' },
       isNameValid: false,
@@ -50,7 +50,7 @@ class Signup extends Component {
   onChange = (event) => {
     let key = event.target.name;
     let value = event.target.value;
-
+    console.log(key,value)
     this.setState({
       [key]: value
     }, () => this.checkValidation(key, value));
@@ -79,7 +79,7 @@ class Signup extends Component {
        errors.password = isPasswordValid ? '' : 'is too Weak';
         break;
       case 'name':
-        isNameValid = value.match(/^[a-zA-Z]+$/);
+        isNameValid = value.match(/^[A-Z][a-zA-Z][^#&<>\"~;$^%{}?]{1,20}$/);
         errors.name = isNameValid ? '' : ' is required';
         break;
       case 'role':
@@ -98,6 +98,7 @@ class Signup extends Component {
 
     }, this.validation());
   }
+
   componentWillMount(){
     if(localStorage.getItem('currentUser')){
         this.props.history.push('/');
@@ -111,6 +112,15 @@ class Signup extends Component {
         this.state.isPhoneValid &&
         this.state.isRoleValid
     });
+  }
+  roleType=(type)=>{
+    console.log(type)
+    // let key = 'role';
+    // let value = type;
+    // console.log(key,value)
+    // this.setState({
+    //   [key]: value
+    // }, () => this.checkValidation(key, value));
   }
   onClickSignUp=(e)=>{
     e.preventDefault();
@@ -141,9 +151,16 @@ class Signup extends Component {
               <Input inputType={'email'} inputName={'email'} inputPlaceholder={'Email'} inputValue={this.state.email} inputChange={this.onChange}></Input>
               <label>Mobile</label>
               <Input inputType={'tel'} inputName={'mobile'} inputPlaceholder={'Mobile'} inputValue={this.state.mobile} inputChange={this.onChange}></Input>
-              <label>Role</label>
-              <Input inputType={'tel'} inputName={'role'} inputPlaceholder={'role'} inputValue={this.state.role} inputChange={this.onChange}></Input>
               
+              <label>Role   </label>
+              {/* <Input inputType={'tel'} inputName={'role'} inputPlaceholder={'role'} inputValue={this.state.role} inputChange={this.onChange}></Input> */}
+              <div style={{paddingBottom: 15,}}>
+              <select name='role'  onChange={this.onChange}>
+                {/* <option></option> */}
+                <option  value='user'  >user</option>
+                <option  value='company' >company</option>
+              </select>
+              </div>
               <label>Password</label>
               <Input inputType={'password'} inputName={'password'} inputPlaceholder={'Password'} inputValue={this.state.password} inputChange={this.onChange}></Input><br></br>
               <Button buttonType={'submit'} buttonClick={this.onClickSignUp} buttonName={'Submit'}></Button>
