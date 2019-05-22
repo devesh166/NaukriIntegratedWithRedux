@@ -9,7 +9,7 @@ html, body, #app, .container {
   max-width: 100%;
 }
 
-input[type="text"] {
+inp {
   margin: 10px 0px;
   height: 60px;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
@@ -25,7 +25,7 @@ input[type="text"] {
   transition: border-color 0.2s ease-in-out;
 }
 
-input[type="text"]:focus {
+inp:focus {
   border: 1px solid #AF9570;
   outline: none !important;
 }

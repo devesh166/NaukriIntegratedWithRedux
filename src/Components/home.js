@@ -119,28 +119,28 @@ export default class Home extends Component {
         <JobFilter filter={this.state} onfilterchange={(temp) => { this.changeFilter(temp) }} />
         <div className='container-fluid'>
           <JobListing filterList={this.state} applied={this.state.applied} jobs={this.state.jobs} />
-          <nav aria-label="Page navigation   " style={{float: 'inline-end'}}>
+          <div aria-label="Page navigation   " style={{ marginBottom:20}}>
             <ul class="pagination pg-blue">
-              <li class="page-item">
+              {/* <li class="page-item">
                 <a class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
-              </li>
+              </li> */}
 
               {this.generateButton()}
-              <li class="page-item">
+              {/* <li class="page-item">
                 <a class="page-link" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
-              </li>
+              </li> */}
             </ul>
-          </nav>
-
+          </div>
+          <AppFooter />
         </div>
 
-        <AppFooter />
+     
 
 
       </div >

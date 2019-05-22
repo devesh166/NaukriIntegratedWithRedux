@@ -15,8 +15,8 @@ class Messages extends React.Component {
         return (
           <Message
             key={i}
-            username={message.username}
-            message={message.message}
+            username={message.username ||message.name }
+            message={message.message|| message.data}
             fromMe={message.fromMe} />
         );
       });

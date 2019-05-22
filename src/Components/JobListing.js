@@ -97,7 +97,10 @@ class jobListing extends Component {
         this.props.history.push({
             pathname: '/chat',
             state: {
-               reciever:data
+               reciever:{
+                   name:data.name,
+                   _id:data.user_id
+               }
             }
           })
     }
@@ -174,7 +177,7 @@ class jobListing extends Component {
                                             {localStorage.getItem('currentUser') ?
                                                 (currentUser.role < 2 ? (currentUser.name == item.name ? <button onClick={() => { this.editjobs(item) }} className="w3-button w3-block w3-dark-grey btn1"  >Edit</button> : '') :
                                                     (appliedJobs.find((ele) => { return ele == item._id }) ? <div >
-                                                        <div  style={{ backgroundColor: `${this.statusColor[this.checkStatus(item._id)]}` }} className="w3-block w3-button btn1" >Status : {this.status[this.checkStatus(item._id)]}</div><div><button className="w3-button w3-block btn1"  onClick={()=>{this.chatNavigate(item)}}> chat </button></div></div> : <button onClick={() => { this.applyJob(item) }} className="w3-button w3-block w3-dark-grey btn1">Apply</button>))
+                                                        <div  style={{ backgroundColor: `${this.statusColor[this.checkStatus(item._id)]}` }} className="w3-block w3-button btn1" >Status : {this.status[this.checkStatus(item._id)]}</div><div><button className="w3-button w3-block btn1"  onClick={()=>{this.chatNavigate(item)}}> Chat </button></div></div> : <button onClick={() => { this.applyJob(item) }} className="w3-button w3-block w3-dark-grey btn1">Apply</button>))
                                                 : <button className="w3-button w3-block btn1" ><Link to="/signin"> Login to Apply</Link></button>}
                                             
                                             {/* {temp =this.this.state.jobs} */}

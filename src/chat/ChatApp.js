@@ -7,6 +7,7 @@ import config from '../config';
 import Messages from './Messages';
 import ChatInput from './ChatInput';
 import  './ChatApp.css'
+import Axios from 'axios';
 // require('../styles/ChatApp.css');
  
 var currentUser
@@ -22,6 +23,7 @@ class ChatApp extends React.Component {
     this.state.reciever = this.props.location.state.reciever;
     // console.log(currentUser)
     // Connect to the server
+    
     this.socket = io(config.api, { query:{"username": currentUser.name  ,"userID": currentUser._id}  }).connect();
     console.log(this.state.reciever )
     // Listen for messages from the server
@@ -30,6 +32,27 @@ class ChatApp extends React.Component {
       this.addMessage(message);
     });
   }
+  
+  componentDidMount(){
+      console.log( this.state.reciever._id)
+      console.log( currentUser._id)
+    // if(currentUser.name === this.state.reciever.name){
+  Axios.post("http://localhost:5001/message",{ id1:currentUser._id, id2:this.state.reciever._id}).then((res)=>{
+  
+    if(res.data[0]){
+      console.log(res.data[0].message)
+      this.setState({messages: res.data[0].message})
+    // }
+
+    // })
+    // }else{
+    //   this.setState({   messages:[]})
+    }
+    
+    
+  })
+}
+ 
 
   sendHandler(message) {
     const messageObject = {
@@ -56,7 +79,7 @@ class ChatApp extends React.Component {
   render() {
     return (
       <div className="container">
-        <h3>React Chat App</h3>
+        <h3> {currentUser.name} to {this.state.reciever.name}</h3>
         <Messages messages={this.state.messages} />
         <ChatInput onSend={this.sendHandler} />
       </div>

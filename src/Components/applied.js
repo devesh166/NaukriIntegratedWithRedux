@@ -122,7 +122,14 @@ export default class applied extends Component {
         // this.props.onfilterchange(this.state);
 
     }
-
+    chatNavigate=(data)=>{
+        this.props.history.push({
+            pathname: '/chat',
+            state: {
+               reciever:data
+            }
+          })
+    }
 
     render() {
         let temp = [];
@@ -200,6 +207,7 @@ export default class applied extends Component {
                                                                         <div className="  "><b>mobile :</b>{ele.mobile}</div>
                                                                         <div className="  "><b>location :</b>{ele.location}</div>
                                                                         {/* <div>{ele.name}</div> */}
+                                                                        <div><button className="w3-button w3-block btn1"  onClick={()=>{this.chatNavigate(ele)}}> Chat </button></div>
                                                                         <div style={{ display: 'inline-block' }}>
                                                                             <span><b>Status :</b></span>
                                                                             <span class="dropdown">

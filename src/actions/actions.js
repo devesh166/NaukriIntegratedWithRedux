@@ -23,7 +23,7 @@ export const getJobs = (company,pageNo) => {
     var url;
     console.log(company,pageNo)
     if (company) {
-        url = `http://localhost:5001/jobs/${company}`
+        url = `http://localhost:5001/jobs2/${company}`
 
         return dispatch => {
             console.log('in action')
