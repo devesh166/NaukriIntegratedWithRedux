@@ -4,7 +4,9 @@ const jobReducer = (state = {}, action)=> {
 
             return state = {
               //  ...state,
-                data: action.payload
+                data: action.payload.message,
+                pages: action.payload.page
+
                 
             };
         }

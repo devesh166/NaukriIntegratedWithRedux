@@ -19,9 +19,9 @@ export const getJobsSucess = (data) => {
 
 
 
-export const getJobs = (company) => {
+export const getJobs = (company,pageNo) => {
     var url;
-
+    console.log(company,pageNo)
     if (company) {
         url = `http://localhost:5001/jobs/${company}`
 
@@ -30,44 +30,45 @@ export const getJobs = (company) => {
             axios.get(url).then((res) => {
                 console.log(res.data);
                 dispatch(getJobsSucess(res.data))
-               
+
             }).catch((err) => {
                 return err;
             })
-    
+
         }
 
     } else {
-        url = 'http://localhost:5001/jobs/';
+       
+        url = `http://localhost:5001/jobs2/${pageNo}`;
 
         return dispatch => {
-           // console.log('in action')
+            // console.log('in action')
             axios.get(url).then((res) => {
-                //console.log(res.data);
+                console.log(res.data);
 
-                let currentUser=JSON.parse(localStorage.getItem('currentUser'));
+                let currentUser = JSON.parse(localStorage.getItem('currentUser'));
                 // 
                 // dispatch(getAppliedJobs({ user_id :currentUser._id}))
-                let pr = new Promise ( (resolve,reject)=>{
-                    if(currentUser){
-                        dispatch(getAppliedJobs({ user_id :currentUser._id}))
+                let pr = new Promise((resolve, reject) => {
+                    if (currentUser) {
+                        dispatch(getAppliedJobs({ user_id: currentUser._id }))
                     }
-                   
+
                     resolve();
                 })
-                pr.then(()=>{
+                pr.then(() => {
                     dispatch(getJobsSucess(res.data))
                 })
-               
+
             }).catch((err) => {
                 return err;
             })
-    
+
         }
 
     }
 
-    
+
 }
 
 
@@ -125,20 +126,20 @@ export const getAllUsersSucess = (data) => {
 export const getAllUsers = () => {
     var url;
 
-     // console.log("in fn")
+    // console.log("in fn")
 
     url = 'http://localhost:5001/users';
     return dispatch => {
         //console.log('in action')
         axios.get(url).then((res) => {
-           //  console.log(res.data);
+            //  console.log(res.data);
 
             if (res.data.errors) {
                 window.alert(JSON.stringify(res.data.message))
-            } else{
+            } else {
                 dispatch(getAllUsersSucess(res.data))
             }
-            
+
         }).catch((err) => {
             alert(err);
         })
@@ -166,16 +167,16 @@ export const getUser = (user) => {
     return dispatch => {
         //console.log('in action')
         axios.post(url, user).then((res) => {
-             console.log(res.data);
+            console.log(res.data);
             if (res.data.errors) {
                 window.alert(JSON.stringify(res.data.message))
-            }else if(res.data=== ''){
+            } else if (res.data === '') {
                 window.alert('Invalid Username/ Password')
-            } 
-            else{
+            }
+            else {
                 dispatch(getUserSucess(res.data))
             }
-            
+
         }).catch((err) => {
             alert(err);
         })
@@ -184,7 +185,7 @@ export const getUser = (user) => {
 }
 
 //--------update Job status-----
-export const  changeJobStatusSucess = (data) => {
+export const changeJobStatusSucess = (data) => {
     return {
         type: "CHANGE_JOB_STATUS",
         payload: data
@@ -194,19 +195,19 @@ export const  changeJobStatusSucess = (data) => {
 
 
 export const changeJobStatus = (user) => {
-    var url; 
+    var url;
     url = 'http://localhost:5001/apply';
     return dispatch => {
         //console.log('in action')
         axios.put(url, user).then((res) => {
-             console.log(res.data);
+            console.log(res.data);
 
             if (res.data.errors) {
                 window.alert(JSON.stringify(res.data.message))
-            } else{
+            } else {
                 dispatch(changeJobStatusSucess(res.data))
             }
-            
+
         }).catch((err) => {
             alert(err);
         })
@@ -234,16 +235,16 @@ export const getAppliedJobs = (user) => {
 
     url = 'http://localhost:5001/applied';
     return dispatch => {
-       // console.log(user)
+        // console.log(user)
         axios.post(url, user)
             .then((res) => {
                 if (res.data.errors) {
                     window.alert(JSON.stringify(res.data.message))
                 } else {
-                   // console.log(res.data)
+                    // console.log(res.data)
                     // let pr = new Promise((resolve, reject) => {
                     //     
-                     dispatch(getAppliedJobsSucess(res.data))
+                    dispatch(getAppliedJobsSucess(res.data))
                     //     // resolve();
                     // })
                     // pr.then(() => {
@@ -251,9 +252,9 @@ export const getAppliedJobs = (user) => {
                     //     dispatch(getJobs())
                     // })
 
-                    
+
                 }
- 
+
             })
             .catch((err) => {
                 console.log(err.response)
@@ -272,7 +273,7 @@ export const getAppliedJobs = (user) => {
 
 
 // export const getUserList = (appliedUsers) => {
-     
+
 //     var userList1=[];
 
 //      //console.log('feched data', appliedUsers)
@@ -286,7 +287,7 @@ export const getAppliedJobs = (user) => {
 //                     window.alert(JSON.stringify(res.data.message))
 //                 } else {
 //                     userList1.push(res.data)  
-                     
+
 //                 }
 //             })
 //             size--;
@@ -301,7 +302,7 @@ export const getAppliedJobs = (user) => {
 //     }
 // }
 //---------applied user-----
- 
+
 export const getAppliedUsersSucess = (data) => {
     return {
         type: "APPLIED_USERS",
@@ -317,32 +318,32 @@ export const getAppliedUsers = (user) => {
 
     url = 'http://localhost:5001/appliedUsers';
     return dispatch => {
-      //  console.log(user)
+        //  console.log(user)
         axios.post(url, user)
             .then((res) => {
                 if (res.data.errors) {
                     window.alert(JSON.stringify(res.data.message))
                 } else {
-                   // console.log(res.data)
+                    // console.log(res.data)
                     // 
                     // 
                     // dispatch(getAllUsers())
                     // dispatch(getAppliedUsersSucess(res.data))
-                   // dispatch(getUserList(res.data))
+                    // dispatch(getUserList(res.data))
                     let pr = new Promise((resolve, reject) => {
-                        
+
                         dispatch(getAllUsers())
                         resolve();
                     })
                     pr.then(() => {
-                       dispatch(getAppliedUsersSucess(res.data))
-                       
+                        dispatch(getAppliedUsersSucess(res.data))
+
                     })
 
-                    
+
                 }
 
-                 
+
 
             })
             .catch((err) => {
@@ -394,7 +395,7 @@ export const applyJobs = (user) => {
 
                     })
 
-                    
+
                 }
 
                 console.log(res);
@@ -422,13 +423,13 @@ export const postUser = (user) => {
 
     url = 'http://localhost:5001/signUp';
     return dispatch => {
-       
+
         axios.post(url, user)
             .then((res) => {
                 console.log(res)
                 if (res.data.errmsg) {
                     window.alert(`user with eamil id ${user.email} already registered`)
-                } else if(res.data.errors){
+                } else if (res.data.errors) {
                     window.alert(JSON.stringify(res.data.message))
                 }
                 else {
@@ -463,7 +464,7 @@ export const updateJobs = (job) => {
     return dispatch => {
         console.log(job)
         axios.put(url, job).then((res) => {
-             console.log(res);
+            console.log(res);
             if (res.data.errors) {
                 window.alert(JSON.stringify(res.data.message))
             } else {

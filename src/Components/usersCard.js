@@ -32,10 +32,6 @@ export default class usersCard extends Component {
        
            </div>
               
-               
-              
-               
-           
         
        ) 
    // return

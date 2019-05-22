@@ -7,21 +7,21 @@ class appHeader extends Component {
     SignInMenu() {
         this.nextPath('/signin')
     }
-    SignUpMenu=()=> {
+    SignUpMenu = () => {
         this.nextPath('/signup')
     }
-    logout=()=>{
-       // console.log("logged out")
+    logout = () => {
+        // console.log("logged out")
         localStorage.removeItem('currentUser')
     }
 
     render() {
-       if(localStorage.getItem("currentUser")){
-        var currentUser = JSON.parse(localStorage.getItem("currentUser"))
-        //console.log(currentUser);
-      
-       }
-        
+        if (localStorage.getItem("currentUser")) {
+            var currentUser = JSON.parse(localStorage.getItem("currentUser"))
+            //console.log(currentUser);
+
+        }
+
 
         return (
 
@@ -42,15 +42,15 @@ class appHeader extends Component {
                             <Link to="/signin"> Hi {currentUser.name} </Link>
                         </li>
                         <li>
-                        {localStorage.getItem('currentUser')?( currentUser.role < 2 ? <Link style={{backgroundColor:'#007b5e'}} to='/company'>Add Job</Link> :''):''}
+                            {localStorage.getItem('currentUser') ? (currentUser.role < 2 ? <Link style={{ backgroundColor: '#007b5e' }} to='/company'>Add Job</Link> : '') : ''}
 
                         </li>
                         <li>
-                        {localStorage.getItem('currentUser')?( currentUser.role < 2 ? <Link style={{backgroundColor:'#007b5e'}} to='/applied'>Applied Candidates</Link>:''):''}
+                            {localStorage.getItem('currentUser') ? (currentUser.role < 2 ? <Link style={{ backgroundColor: '#007b5e' }} to='/applied'>Applied Candidates</Link> : '') : ''}
 
                         </li>
                         <li>
-                            <Link to="/" ><span onClick = {this.logout}>Logout</span></Link>
+                            <Link to="/" ><span onClick={this.logout}>Logout</span></Link>
                         </li>
                     </ul>
                         :

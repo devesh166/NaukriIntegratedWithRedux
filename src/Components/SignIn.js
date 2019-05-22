@@ -35,19 +35,20 @@ class SignIn extends Component {
     }
     componentWillReceiveProps(nextProps) {
         console.log('in componet will upd')
-    //   if(nextProps.currentUser !== '') { 
-          this.setState({ currentUser: nextProps.currentUser }, () => {
+        //   if(nextProps.currentUser !== '') { 
+        this.setState({ currentUser: nextProps.currentUser }, () => {
             //  console.log(this.state.currentUser)
             localStorage.setItem("currentUser", JSON.stringify(nextProps.currentUser));
-            if (nextProps.currentUser.role == 1) {
-                return this.props.history.push('/company')
-            } else {
-                return this.props.history.push('/')
-            }
+            return this.props.history.push('/')
+            // if (nextProps.currentUser.role == 1) {
+            //    
+            // } else {
+            //     return this.props.history.push('/')
+            // }
         })
-    // }else{
-    //         window.alert('Invalid Username/Password')
-    //     }
+        // }else{
+        //         window.alert('Invalid Username/Password')
+        //     }
         console.log(nextProps)
 
     }
@@ -96,7 +97,7 @@ class SignIn extends Component {
         });
     }
 
-  
+
 
 
     onClickSignIn = (e) => {
@@ -106,8 +107,8 @@ class SignIn extends Component {
             email: this.state.login_email,
             password: this.state.login_password
         });
-        
-   
+
+
 
     }
     render() {
@@ -117,7 +118,7 @@ class SignIn extends Component {
                 <div className='content'>
 
                     <form>
-                        <h1>Login </h1>
+                        <div className='loginHead'>Login </div>
                         <div >
                             <ErrorHandler className='err' errorList={this.state.formErrors} />
                         </div>

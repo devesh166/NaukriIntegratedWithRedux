@@ -49,7 +49,13 @@
   .card1:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
-
+  .loginHead{
+    background-color: #007b5e;
+    font-size: 30pt;
+    margin-bottom: 30pt;
+    color: #000000;
+    
+  }
 .card{
    background-color: beige;
    margin: 50pt;
@@ -82,7 +88,7 @@
 }
 
 .content{
-    margin-top: 10%;
+    margin-top: 5%;
     margin-left: 30%;
     padding: 10px;
     border-style: solid;

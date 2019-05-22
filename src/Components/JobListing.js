@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import Button from './Button'
 import { Link } from 'react-router-dom';
 import { withRouter } from "react-router-dom";
-import "./style.css"
+import "../chat/app1.css"
+import "../chat/ChatApp.css"
+import "../chat/Login.css"
+
+// require('../styles/App.css');
+// require('../styles/Login.css');
+
  
 var currentUser;
 class jobListing extends Component {
@@ -16,10 +22,18 @@ class jobListing extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        
+        // if(nextProps.company===''&& nextProps.location===''&& nextProps.designation==='' ){
+        //     this.nextProps.jobs.reverse();
+        //   }
+       
         if (this.props.filterList !== nextProps.filterList) {
-            this.setState(nextProps.filterList, () => { console.log(this.state) })
+            this.setState(nextProps.filterList
+            //     , () => { console.log(this.state)
+            //     nextProps.jobs.reverse();
+            // }
+            )
         }
+        
 
     }
     // componentDidUpdate(prevProps, prevState) {
@@ -79,6 +93,14 @@ class jobListing extends Component {
         designation: ''
     })
     }
+    chatNavigate=(data)=>{
+        this.props.history.push({
+            pathname: '/chat',
+            state: {
+               reciever:data
+            }
+          })
+    }
     render() {
         let temp =[];
         
@@ -89,7 +111,7 @@ class jobListing extends Component {
             this.state.applied.map((ele, ind) => {
                 appliedJobs[ind] = ele.job_id;
             })
-            //console.log(appliedJobs)
+            //console.log(appliedJobs).reverse()
         }
 
         if (this.state.company == '' && this.state.location == '' && this.state.designation == '') {
@@ -124,7 +146,10 @@ class jobListing extends Component {
          console.log(temp);
     
         return (
+
             <div>
+      
+
                 {temp.length>0?
                      temp.map((item, ind) => {
                         return (
@@ -149,8 +174,9 @@ class jobListing extends Component {
                                             {localStorage.getItem('currentUser') ?
                                                 (currentUser.role < 2 ? (currentUser.name == item.name ? <button onClick={() => { this.editjobs(item) }} className="w3-button w3-block w3-dark-grey btn1"  >Edit</button> : '') :
                                                     (appliedJobs.find((ele) => { return ele == item._id }) ? <div >
-                                                        <div  style={{ backgroundColor: `${this.statusColor[this.checkStatus(item._id)]}` }} className="w3-block w3-button btn1" >Status : {this.status[this.checkStatus(item._id)]}</div></div> : <button onClick={() => { this.applyJob(item) }} className="w3-button w3-block w3-dark-grey btn1">Apply</button>))
+                                                        <div  style={{ backgroundColor: `${this.statusColor[this.checkStatus(item._id)]}` }} className="w3-block w3-button btn1" >Status : {this.status[this.checkStatus(item._id)]}</div><div><button className="w3-button w3-block btn1"  onClick={()=>{this.chatNavigate(item)}}> chat </button></div></div> : <button onClick={() => { this.applyJob(item) }} className="w3-button w3-block w3-dark-grey btn1">Apply</button>))
                                                 : <button className="w3-button w3-block btn1" ><Link to="/signin"> Login to Apply</Link></button>}
+                                            
                                             {/* {temp =this.this.state.jobs} */}
         
         

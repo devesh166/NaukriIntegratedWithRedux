@@ -11,7 +11,8 @@ const mapStateToProps=(state)=>{
    return {
    // fetchJobs:'state.fetchJobs',
     applied : state.fetchJobs.applied,
-    jobs:state.fetchJobs.data
+    jobs:state.fetchJobs.data,
+    pages :state.fetchJobs.pages
      
 
    }
@@ -21,7 +22,7 @@ const mapDispatchtoProps=(dispatch)=>{
     
     return {
         //dispatch,
-        getJobs: (company)=>dispatch(getJobs(company)) ,
+        getJobs: (company,pageNo)=>dispatch(getJobs(company,pageNo)) ,
         getAppliedJobs: (user) => dispatch(getAppliedJobs(user))
        // getJobSkills: () => dispatch(getJobSkills()),
 
