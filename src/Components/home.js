@@ -89,7 +89,7 @@ export default class Home extends Component {
     // }
     let count = 1;
     while (i > 0) {
-      pageArray.push(<li class="page-item"><button onClick={this.onPageClick} value={count} class="page-link">{count++}</button></li>)
+      pageArray.push(<span><button onClick={this.onPageClick} value={count} class="page-link" style={{display : 'inline-block'}} >{count++}</button></span>)
       i--;
     }
     return pageArray;
@@ -119,30 +119,31 @@ export default class Home extends Component {
         <JobFilter filter={this.state} onfilterchange={(temp) => { this.changeFilter(temp) }} />
         <div className='container-fluid'>
           <JobListing filterList={this.state} applied={this.state.applied} jobs={this.state.jobs} />
-          <div aria-label="Page navigation   " style={{ marginBottom:20}}>
+          </div>
+          <div aria-label="Page navigation   " style={{ marginBottom:20 }}>
             <ul class="pagination pg-blue">
-              {/* <li class="page-item">
+              <li class="page-item">
                 <a class="page-link" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
-              </li> */}
+              </li>
 
-              {this.generateButton()}
-              {/* <li class="page-item">
+             <li class="page-item " style={{listStyle :'none'}} >{this.generateButton()}</li>
+              <li class="page-item">
                 <a class="page-link" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
-              </li> */}
+              </li>
             </ul>
           </div>
-          <AppFooter />
-        </div>
+          
+        
 
      
 
-
+              <AppFooter />
       </div >
     )
   }

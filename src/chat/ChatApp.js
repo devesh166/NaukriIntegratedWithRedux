@@ -7,6 +7,7 @@ import config from '../config';
 import Messages from './Messages';
 import ChatInput from './ChatInput';
 import  './ChatApp.css'
+import  './app1.css'
 import Axios from 'axios';
 // require('../styles/ChatApp.css');
  
